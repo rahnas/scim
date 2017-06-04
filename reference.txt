@@ -1,0 +1,13 @@
+Initial call from Okta to OPP Agent
+
+C:\netcat>nc -l -p 8080
+GET /scim/ServiceProviderConfigs HTTP/1.1
+Accept: application/json
+Accept-Charset: utf-8
+Content-Type: application/json; charset=utf-8
+User-Agent: Okta OPP Agent - 1.0.11
+Host: localhost:8080
+Connection: Keep-Alive
+Accept-Encoding: gzip,deflate
+
+/***********************************************************/
