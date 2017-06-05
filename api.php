@@ -6,6 +6,8 @@
 
 /**********************************************/
 
+error_reporting(E_ALL & ~E_NOTICE);
+
 include "includes/parseIncoming.php";
 
 // example query: PUT /scim/Users/{id} + JSON payload
