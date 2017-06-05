@@ -6,6 +6,7 @@
 
 /**********************************************/
 
+include "includes/parseIncoming.php";
 
 // example query: PUT /scim/Users/{id} + JSON payload
 
@@ -23,6 +24,46 @@ if ($method === "GET") {
 		echo file_get_contents("scimConfig.json");
 		exit;
 	}
+	else if ($endpoint === "Users") {
+		echo getUsers();
+		exit;
+	}
+	else if ($endpoint === "Groups") {
+		echo getGroups();
+		exit;
+	}
+}
+
+function getGroups() {
+	$json = file_get_contents("data/groups.json");
+
+	$arr = json_decode($json, TRUE);
+
+	$retVal["totalResults"] = sizeof($arr["Resources"]);
+
+	$retVal["schemas"] = array("urn:scim:schemas:core:1.0");
+
+	$retVal["itemsPerPage"] = sizeof($arr["Resources"]);
+
+	$retVal["startIndex"] = 1;
+
+	$retVal["Resources"] = $arr["Resources"];
+
+	return json_encode($retVal);
+}
+
+function getUsers() {
+	$json = file_get_contents("data/users.json");
+
+	$arr = json_decode($json, TRUE);
+
+	$retVal["totalResults"] = sizeof($arr["Resources"]);
+
+	$retVal["schemas"] = array("urn:scim:schemas:core:1.0");
+
+	$retVal["Resources"] = $arr["Resources"];
+
+	return json_encode($retVal);
 }
 
 echo "<p> the server request method is: " . $method;
@@ -34,33 +75,3 @@ echo "<p> the endpoint is: " . $endpoint;
 echo "<p> the resourceID is: " . $resourceID;
 
 exit;
-
-function getEndpoint() {
-
-	$args = explode("/", $_REQUEST['request']);
-
-	return $args[0];
-}
-
-function getMethod($method) {
-	if ($method == 'POST' && array_key_exists('HTTP_X_HTTP_METHOD', $_SERVER)) {
-		if ($_SERVER['HTTP_X_HTTP_METHOD'] == 'DELETE') {
-			$method = 'DELETE';
-		} else if ($_SERVER['HTTP_X_HTTP_METHOD'] == 'PUT') {
-			$method = 'PUT';
-		} else {
-			echo "<p>cannot parse header";
-			exit;
-		}
-	}
-
-	return $method;
-}
-
-function getPayload() { return ""; }
-
-function getResourceID() {
-	$args = explode("/", $_REQUEST['request']);
-
-	return $args[1];
-}

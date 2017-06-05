@@ -1,0 +1,20 @@
+Initial call from Okta to OPP Agent
+
+C:\netcat>nc -l -p 8080
+GET /scim/ServiceProviderConfigs HTTP/1.1
+Accept: application/json
+Accept-Charset: utf-8
+Content-Type: application/json; charset=utf-8
+User-Agent: Okta OPP Agent - 1.0.11
+Host: localhost:8080
+Connection: Keep-Alive
+Accept-Encoding: gzip,deflate
+
+/***********************************************************/
+
+"GET /scim/Groups?startIndex=1&count=200 HTTP/1.1" 404 209 "-" "Okta OPP Agent - 1.0.11"
+
+
+{"totalResults":2,"schemas":["urn:scim:schemas:core:1.0"],"itemsPerPage":2,"startIndex":1,"Resources":[{"schemas":["urn:scim:schemas:core:1.0"],"id":"1002","displayName":"secondGroup","members":[{"value":"101","display":"okta"},{"value":"102","display":"admin"}]}, {"schemas":["urn:scim:schemas:core:1.0","urn:okta:custom:group:1.0"],"id":"1001","displayName":"firstGroup","members":[{"value":"101","display":"okta"}],"urn:okta:custom:group:1.0":{"description":"This is the first group"}}]}
+
+/***********************************************************/
