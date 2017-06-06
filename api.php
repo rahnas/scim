@@ -44,10 +44,6 @@ else if ($method === "PUT") {
 
 		file_put_contents("data/users.json", json_encode($arr));
 
-
-		// echo "<p>the userID is: " . $resourceID;
-		// echo "<p>the payload is: " . $payload;
-
 		echo $payload;
 	}
 	exit;
