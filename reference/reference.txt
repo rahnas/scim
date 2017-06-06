@@ -18,3 +18,15 @@ Accept-Encoding: gzip,deflate
 {"totalResults":2,"schemas":["urn:scim:schemas:core:1.0"],"itemsPerPage":2,"startIndex":1,"Resources":[{"schemas":["urn:scim:schemas:core:1.0"],"id":"1002","displayName":"secondGroup","members":[{"value":"101","display":"okta"},{"value":"102","display":"admin"}]}, {"schemas":["urn:scim:schemas:core:1.0","urn:okta:custom:group:1.0"],"id":"1001","displayName":"firstGroup","members":[{"value":"101","display":"okta"}],"urn:okta:custom:group:1.0":{"description":"This is the first group"}}]}
 
 /***********************************************************/
+
+172.31.21.241 - - [05/Jun/2017:20:14:45 +0000] "GET /scim/Users?filter=userName+eq+%22harry.potter%40mailinator.com%22&startIndex=1&count=200 HTTP/1.1" 200 1097 "-" "Okta OPP Agent - 1.0.11"
+172.31.21.241 - - [05/Jun/2017:20:14:45 +0000] "PUT /scim/Users/101 HTTP/1.1" 200 125 "-" "Okta OPP Agent - 1.0.11"
+
+/***********************************************************/
+
+json from new user from Okta:
+{"schemas":["urn:scim:schemas:core:1.0","urn:scim:schemas:extension:enterprise:1.0"],"userName":"harry.potter@mailinator.com","id":"101","name":{"formatted":"harry potter","givenName":"harry","familyName":"potter"},"emails":[{"value":"harry.potter@mailinator.com","primary":true,"type":"primary"}],"active":true}
+
+
+
+

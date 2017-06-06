@@ -36,6 +36,15 @@ else if ($method === "PUT") {
 	if ($endpoint === "Users") {
 		file_put_contents("users.txt", $payload);
 
+		$json = file_get_contents("data/users.json");
+
+		$arr = json_decode($json, TRUE);
+
+		$arr["Resources"][] = json_decode($payload, TRUE);
+
+		file_put_contents("data/users.json", json_encode($arr));
+
+
 		// echo "<p>the userID is: " . $resourceID;
 		// echo "<p>the payload is: " . $payload;
 
