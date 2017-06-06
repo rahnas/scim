@@ -24,11 +24,12 @@ function getMethod($method) {
 			exit;
 		}
 	}
-
 	return $method;
 }
 
-function getPayload() { return ""; }
+function getPayload() {
+	return file_get_contents('php://input');
+}
 
 function getResourceID() {
 	$args = explode("/", $_REQUEST['request']);

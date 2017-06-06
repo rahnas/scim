@@ -6,8 +6,6 @@
 
 /**********************************************/
 
-error_reporting(E_ALL & ~E_NOTICE);
-
 include "includes/parseIncoming.php";
 
 // example query: PUT /scim/Users/{id} + JSON payload
@@ -21,7 +19,6 @@ $resourceID = getResourceID(); // {id}
 $payload = getPayload(); // json payload
 
 if ($method === "GET") {
-
 	if ($endpoint === "ServiceProviderConfigs") {
 		echo file_get_contents("scimConfig.json");
 		exit;
@@ -34,6 +31,21 @@ if ($method === "GET") {
 		echo getGroups();
 		exit;
 	}
+}
+else if ($method === "PUT") {
+	if ($endpoint === "Users") {
+		file_put_contents("users.txt", $payload);
+
+		// echo "<p>the userID is: " . $resourceID;
+		// echo "<p>the payload is: " . $payload;
+
+		echo $payload;
+	}
+	exit;
+}
+else {
+	echo "<p> the method is: " . $method;
+	exit;
 }
 
 function getGroups() {
